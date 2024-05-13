@@ -13,7 +13,8 @@ def hitung_kecukupan_gizi_umur_berat_badan_tinggi_umum(umur, berat_badan, tinggi
     return tee
 
 def page_kebutuhan_energi():
-    st.image("c:\\Users\\mrbal\\Pictures\\Saved Pictures\\hitung.jpg", use_column_width=True)
+   image_path = 'hitung.jpg'  # Ganti dengan path yang sesuai ke file gambar Anda
+    st.image(image_path, caption='Ilustrasi gambar')
     st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
