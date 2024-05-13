@@ -84,35 +84,41 @@ def page_konsumsi_kalori():
     </h1>
     """, unsafe_allow_html=True)
     
-    # Daftar makanan yang diperluas dengan makanan populer di Indonesia
-    daftar_makanan = [
-        "Apel", "Pisang", "Ayam goreng", "Roti gandum", "Telur rebus", "Salmon panggang", "Nasi putih", "Kentang rebus", "Brokoli", "Yogurt rendah lemak",
-        "Kacang almond", "Tomat", "Oatmeal", "Bayam", "Wortel", "Mangga", "Beras coklat", "Roti putih", "Daging sapi panggang", "Keju cheddar",
-        "Kacang kedelai", "Jeruk", "Quinoa", "Lobak", "Ikan tuna kalengan dalam air", "Kacang polong", "Susu rendah lemak", "Mentimun", "Dada ayam tanpa kulit panggang",
-        "Anggur", "Telur orak-arik", "Kacang merah", "Labu", "Roti gandum utuh panggang", "Bayam", "Brokoli", "Jagung manis", "Buncis", "Nanas",
-        "Seledri", "Kembang kol", "Pepaya", "Paprika merah", "Bawang bombay", "Aprikot", "Kiwi", "Labu kuning", "Labu air", "Semangka", "Salak",
-        "Nasi goreng", "Sate", "Bakso", "Gado-gado", "Rendang", "Pempek", "Martabak", "Kerak telor", "Tahu bulat", "Tempe goreng"
-    ]
+   data_kalori = {
+        "Apel": 52, "Pisang": 89, "Ayam goreng": 240, "Roti gandum": 247, "Telur rebus": 155,
+        "Salmon panggang": 206, "Nasi putih": 130, "Kentang rebus": 87, "Brokoli": 34,
+        "Yogurt rendah lemak": 63, "Nasi goreng": 190, "Sate": 290, "Bakso": 120,
+        "Gado-gado": 149, "Rendang": 195, "Pempek": 180, "Martabak": 320, "Kerak telor": 250,
+        "Tahu bulat": 275, "Tempe goreng": 193, "Soto ayam": 89, "Bubur ayam": 65,
+        "Mie goreng": 206, "Lumpia": 175, "Es cendol": 90, "Kue cubit": 221, "Pisang goreng": 150,
+        "Kerupuk": 480, "Opor ayam": 245, "Sayur asem": 40, "Serabi": 216, "Otak-otak": 134,
+        "Klepon": 120, "Lemper": 198, "Pastel": 289, "Risoles": 229, "Kue lapis": 289,
+        "Bika Ambon": 320, "Kue Lumpur": 198, "Kue Sus": 300, "Kue Serabi": 221, "Kue Pukis": 321,
+        "Kue Putu": 130, "Kue Cucur": 150, "Kue Dadar Gulung": 182, "Kue Kastengel": 500,
+        "Kue Nastar": 480, "Kue Semprit": 450, "Kue Soes": 260, "Kue Tape": 160, "Kue Wingko": 350,
+        "Kue Bawang": 530, "Kue Kering": 500, "Kue Bolu": 340, "Kue Donat": 452, "Kue Brownies": 466,
+        "Kue Tart": 270, "Kue Pandan": 220, "Kue Talam": 180
+    }
 
-    # Inisialisasi list untuk menyimpan makanan dan kalori
     if 'makanan_terpilih' not in st.session_state:
         st.session_state.makanan_terpilih = []
         st.session_state.total_kalori = 0
 
-    makanan_dipilih = st.selectbox('Pilih nama makanan', daftar_makanan)
-    kalori = st.number_input('Masukkan jumlah kalori makanan', min_value=0.0, step=0.1)
+    makanan_dipilih = st.selectbox('Pilih nama makanan', list(data_kalori.keys()))
+    berat_makanan = st.number_input('Masukkan berat makanan yang dikonsumsi (gram)', min_value=0.0, step=0.1)
 
     if st.button('Tambahkan Makanan'):
-        st.session_state.makanan_terpilih.append((makanan_dipilih, kalori))
+        kalori_per_100g = data_kalori[makanan_dipilih]
+        kalori = (kalori_per_100g * berat_makanan) / 100
+        st.session_state.makanan_terpilih.append((makanan_dipilih, berat_makanan, kalori))
         st.session_state.total_kalori += kalori
-        st.write(f"Anda telah menambahkan {makanan_dipilih} dengan {kalori:.2f} kalori.")
-        st.write(f"Total kalori yang dikonsumsi: {st.session_state.total_kalori:.2f} kalori")
+        st.success(f"Anda telah menambahkan {makanan_dipilih} dengan {kalori:.2f} kalori.")
+        st.info(f"Total kalori yang dikonsumsi: {st.session_state.total_kalori:.2f} kalori")
 
-    # Menampilkan daftar makanan yang telah ditambahkan
     if st.session_state.makanan_terpilih:
         st.write("Daftar Makanan yang Dikonsumsi:")
-        for makanan, kal in st.session_state.makanan_terpilih:
-            st.write(f"{makanan} - {kal:.2f} kalori")
+        for makanan, berat, kal in st.session_state.makanan_terpilih:
+            st.write(f"{makanan} ({berat} gram) - {kal:.2f} kalori")
 
 def page_tips_trick():
     image_path = 'yoga.jpg'  # Ganti dengan path yang sesuai ke file gambar Anda
