@@ -13,7 +13,8 @@ def hitung_kecukupan_gizi_umur_berat_badan_tinggi_umum(umur, berat_badan, tinggi
     return tee
 
 def page_kebutuhan_energi():
-    st.image("c:\\Users\\mrbal\\Pictures\\Saved Pictures\\hitung.jpg", use_column_width=True)
+    image_path = 'hitung.jpg'  # Ganti dengan path yang sesuai ke file gambar Anda
+    st.image(image_path, caption='hitung yang dibutuhkan')
     st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
@@ -72,7 +73,8 @@ def page_kebutuhan_energi():
                 st.success("Asupan kalori Anda sesuai dengan kebutuhan energi harian Anda.")
 
 def page_konsumsi_kalori():
-    st.image("c:\\Users\\mrbal\\Pictures\\Saved Pictures\\kalor.jpg", use_column_width=True)
+    image_path = 'kalor.jpg'  # Ganti dengan path yang sesuai ke file gambar Anda
+    st.image(image_path, caption='kalori yang dikonsumsi')
     st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
@@ -120,7 +122,8 @@ def page_konsumsi_kalori():
             st.write(f"{makanan} ({berat} gram) - {kal:.2f} kalori")
 
 def page_tips_trick():
-    st.image("c:\\Users\\mrbal\\Pictures\\Saved Pictures\\yoga.jpg", use_column_width=True)
+    image_path = 'yoga.jpg'  # Ganti dengan path yang sesuai ke file gambar Anda
+    st.image(image_path, caption='hidup sehat')
     st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
