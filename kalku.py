@@ -13,8 +13,7 @@ def hitung_kecukupan_gizi_umur_berat_badan_tinggi_umum(umur, berat_badan, tinggi
     return tee
 
 def page_kebutuhan_energi():
-    image_path = 'hitung.jpg'  # Ganti dengan path yang sesuai ke file gambar Anda
-    st.image(image_path, caption='menghitung yang dibutuhkan')
+    st.image("c:\\Users\\mrbal\\Pictures\\Saved Pictures\\hitung.jpg", use_column_width=True)
     st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
@@ -73,56 +72,55 @@ def page_kebutuhan_energi():
                 st.success("Asupan kalori Anda sesuai dengan kebutuhan energi harian Anda.")
 
 def page_konsumsi_kalori():
-    image_path = 'kalor.jpg'  # Ganti dengan path yang sesuai ke file gambar Anda
-    st.image(image_path, caption='kalori makanan')
+    st.image("c:\\Users\\mrbal\\Pictures\\Saved Pictures\\kalor.jpg", use_column_width=True)
     st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
     </style>
-    <h1 style="font-family: 'Roboto Condensed', sans-serif; color: white; text-transform: uppercase; background-color: #4E154D; padding: 10px;">
+    <h1 style="font-family: 'Roboto Condensed', sans-serif; color: white; text-transform: uppercase; background-color: #CB7CAB; padding: 10px;">
         HITUNG KALORI YANG DIKONSUMSI
     </h1>
     """, unsafe_allow_html=True)
     
-   data_kalori = {
-    "Apel": 52, "Pisang": 89, "Ayam goreng": 240, "Roti gandum": 247, "Telur rebus": 155,
-    "Salmon panggang": 206, "Nasi putih": 130, "Kentang rebus": 87, "Brokoli": 34,
-    "Yogurt rendah lemak": 63, "Nasi goreng": 190, "Sate": 290, "Bakso": 120,
-    "Gado-gado": 149, "Rendang": 195, "Pempek": 180, "Martabak": 320, "Kerak telor": 250,
-    "Tahu bulat": 275, "Tempe goreng": 193, "Soto ayam": 89, "Bubur ayam": 65,
-    "Mie goreng": 206, "Lumpia": 175, "Es cendol": 90, "Kue cubit": 221, "Pisang goreng": 150,
-    "Kerupuk": 480, "Opor ayam": 245, "Sayur asem": 40, "Serabi": 216, "Otak-otak": 134,
-    "Klepon": 120, "Lemper": 198, "Pastel": 289, "Risoles": 229, "Kue lapis": 289,
-    "Bika Ambon": 320, "Kue Lumpur": 198, "Kue Sus": 300, "Kue Serabi": 221, "Kue Pukis": 321,
-    "Kue Putu": 130, "Kue Cucur": 150, "Kue Dadar Gulung": 182, "Kue Kastengel": 500,
-    "Kue Nastar": 480, "Kue Semprit": 450, "Kue Soes": 260, "Kue Tape": 160, "Kue Wingko": 350,
-    "Kue Bawang": 530, "Kue Kering": 500, "Kue Bolu": 340, "Kue Donat": 452, "Kue Brownies": 466,
-    "Kue Tart": 270, "Kue Pandan": 220, "Kue Talam": 180
-}
+    # Data kalori per 100 gram untuk setiap makanan
+    data_kalori = {
+        "Apel": 52, "Pisang": 89, "Ayam goreng": 240, "Roti gandum": 247, "Telur rebus": 155,
+        "Salmon panggang": 206, "Nasi putih": 130, "Kentang rebus": 87, "Brokoli": 34,
+        "Yogurt rendah lemak": 63, "Nasi goreng": 190, "Sate": 290, "Bakso": 120,
+        "Gado-gado": 149, "Rendang": 195, "Pempek": 180, "Martabak": 320, "Kerak telor": 250,
+        "Tahu bulat": 275, "Tempe goreng": 193, "Soto ayam": 89, "Bubur ayam": 65,
+        "Mie goreng": 206, "Lumpia": 175, "Es cendol": 90, "Kue cubit": 221, "Pisang goreng": 150,
+        "Kerupuk": 480, "Opor ayam": 245, "Sayur asem": 40, "Serabi": 216, "Otak-otak": 134,
+        "Klepon": 120, "Lemper": 198, "Pastel": 289, "Risoles": 229, "Kue lapis": 289,
+        "Bika Ambon": 320, "Kue Lumpur": 198, "Kue Sus": 300, "Kue Serabi": 221, "Kue Pukis": 321,
+        "Kue Putu": 130, "Kue Cucur": 150, "Kue Dadar Gulung": 182, "Kue Kastengel": 500,
+        "Kue Nastar": 480, "Kue Semprit": 450, "Kue Soes": 260, "Kue Tape": 160, "Kue Wingko": 350,
+        "Kue Bawang": 530, "Kue Kering": 500, "Kue Bolu": 340, "Kue Donat": 452, "Kue Brownies": 466,
+        "Kue Tart": 270, "Kue Pandan": 220, "Kue Talam": 180
+    }
 
-if 'makanan_terpilih' not in st.session_state:
-    st.session_state.makanan_terpilih = []
-    st.session_state.total_kalori = 0
+    if 'makanan_terpilih' not in st.session_state:
+        st.session_state.makanan_terpilih = []
+        st.session_state.total_kalori = 0
 
-makanan_dipilih = st.selectbox('Pilih nama makanan', list(data_kalori.keys()))
-berat_makanan = st.number_input('Masukkan berat makanan yang dikonsumsi (gram)', min_value=0.0, step=0.1)
+    makanan_dipilih = st.selectbox('Pilih nama makanan', list(data_kalori.keys()))
+    berat_makanan = st.number_input('Masukkan berat makanan yang dikonsumsi (gram)', min_value=0.0, step=0.1)
 
-if st.button('Tambahkan Makanan'):
-    kalori_per_100g = data_kalori[makanan_dipilih]
-    kalori = (kalori_per_100g * berat_makanan) / 100
-    st.session_state.makanan_terpilih.append((makanan_dipilih, berat_makanan, kalori))
-    st.session_state.total_kalori += kalori
-    st.success(f"Anda telah menambahkan {makanan_dipilih} dengan {kalori:.2f} kalori.")
-    st.info(f"Total kalori yang dikonsumsi: {st.session_state.total_kalori:.2f} kalori")
+    if st.button('Tambahkan Makanan'):
+        kalori_per_100g = data_kalori[makanan_dipilih]
+        kalori = (kalori_per_100g * berat_makanan) / 100
+        st.session_state.makanan_terpilih.append((makanan_dipilih, berat_makanan, kalori))
+        st.session_state.total_kalori += kalori
+        st.success(f"Anda telah menambahkan {makanan_dipilih} dengan {kalori:.2f} kalori.")
+        st.info(f"Total kalori yang dikonsumsi: {st.session_state.total_kalori:.2f} kalori")
 
-if st.session_state.makanan_terpilih:
-    st.write("Daftar Makanan yang Dikonsumsi:")
-    for makanan, berat, kal in st.session_state.makanan_terpilih:
-        st.write(f"{makanan} ({berat} gram) - {kal:.2f} kalori")
+    if st.session_state.makanan_terpilih:
+        st.write("Daftar Makanan yang Dikonsumsi:")
+        for makanan, berat, kal in st.session_state.makanan_terpilih:
+            st.write(f"{makanan} ({berat} gram) - {kal:.2f} kalori")
 
 def page_tips_trick():
-    image_path = 'yoga.jpg'  # Ganti dengan path yang sesuai ke file gambar Anda
-    st.image(image_path, caption='tips sehat')
+    st.image("c:\\Users\\mrbal\\Pictures\\Saved Pictures\\yoga.jpg", use_column_width=True)
     st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
